@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sadaf — Coder + H@cker</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { height: 100%; overflow: hidden; font-family: Arial, sans-serif; color: #fff; background: #000; }
+    .video-bg {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: -2;
+    }
+    .video-overlay {
+      position: fixed;
+      top:0; left:0;
+      width:100%; height:100%;
+      background: rgba(0,0,0,0.4);
+      z-index: -1;
+      pointer-events: none;
+    }
+    .wrap {
+      position: relative;
+      z-index: 1;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+    }
+    .logo {
+      width: 100px;
+      height: 100px;
+      object-fit: contain;
+      margin-bottom: 20px;
+    }
+    .title {
+      font-size: clamp(1.5rem, 5vw, 2.5rem);
+      color: #ff66cc;
+      text-shadow: 0 0 10px #ff66cc, 0 0 20px #ff0066;
+      margin-bottom: 10px;
+    }
+    .subtitle {
+      font-size: 1rem;
+      color: #ddd;
+      margin-bottom: 30px;
+    }
+    .discord-card {
+      background: rgba(20,20,30,0.6);
+      border: 1px solid #ff66cc;
+      border-radius: 12px;
+      padding: 20px;
+      max-width: 360px;
+      width: 100%;
+    }
+    .discord-avatar {
+      width: 80px; height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 10px;
+      border: 2px solid #fff;
+    }
+    .discord-name {
+      font-size: 1.2rem; font-weight: bold; color: #fff;
+    }
+    .discord-handle {
+      font-size: 0.9rem; color: #ccc; margin-bottom: 10px;
+    }
+    .discord-role {
+      font-size: 0.9rem; color: #aaa; margin-bottom: 15px;
+    }
+    .badges {
+      margin-bottom: 15px;
+    }
+    .badge {
+      display: inline-block;
+      padding: 6px 10px;
+      border-radius: 8px;
+      margin-right: 8px;
+      font-size: 0.8rem;
+      background: #ff66cc;
+      color: #111;
+    }
+    .badge.editor { background: #66ccff; }
+    .discord-actions {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      background: transparent;
+      border: 1px solid #ff66cc;
+      color: #fff;
+      padding: 8px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .btn:hover {
+      background: #ff66cc;
+      color: #111;
+      transform: scale(1.05);
+    }
+    .bio {
+      margin-top: 30px;
+      max-width: 400px;
+    }
+    .links {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+    .links a {
+      color: #fff;
+      border: 1px solid #ff66cc;
+      padding: 8px 14px;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .links a:hover {
+      background: #ff66cc;
+      color: #111;
+      transform: scale(1.05);
+    }
+    footer {
+      margin-top: 30px;
+      font-size: 0.8rem;
+      color: #ccc;
+    }
+    .controls {
+      margin-top: 20px;
+      display: flex;
+      gap: 10px;
+    }
+    .small-btn {
+      background: transparent;
+      border: 1px solid #ff66cc;
+      color: #fff;
+      padding: 6px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .small-btn:hover {
+      background: #ff66cc;
+      color: #111;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- YouTube iframe as background -->
+  <iframe class="video-bg" 
+    src="https://www.youtube.com/embed/cEDa0eBMzNg?autoplay=1&mute=0&controls=0&loop=1&playlist=cEDa0eBMzNg"
+    frameborder="0"
+    allow="autoplay; encrypted-media"
+    allowfullscreen>
+  </iframe>
+
+  <div class="video-overlay"></div>
+
+  <div class="wrap">
+    <img src="MY Logo.png" class="logo" alt="Logo">
+    <div class="title">Sadaf</div>
+    <div class="subtitle">Coder + H@cker • Owner of TEAM % SDF&gt;_</div>
+
+    <div class="discord-card" id="discordCard" data-username="root_sadaf" data-invite="https://discord.com/invite/KUy7QMVwWk">
+      <img id="discordAvatar" class="discord-avatar" src="MY Logo.png" alt="avatar">
+      <div class="discord-info">
+        <div class="discord-name" id="discordName">root_sadaf</div>
+        <div class="discord-handle" id="discordHandle">@root_sadaf</div>
+        <div class="discord-role">Owner • TEAM % SDF&gt;_</div>
+        <div class="badges">
+          <span class="badge online">Online</span>
+          <span class="badge editor">Editor</span>
+        </div>
+        <div class="discord-actions">
+          <button class="btn" id="copyTagBtn"><i class="fa-regular fa-copy"></i> Copy Tag</button>
+          <button class="btn" id="openDiscordBtn"><i class="fa-brands fa-discord"></i> Open Discord</button>
+          <a class="btn" id="joinServerBtn" href="https://discord.com/invite/KUy7QMVwWk" target="_blank"><i class="fa-solid fa-circle-plus"></i> Join Server</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="bio">
+      <p>💻 Coder + 🔐 H@cker — building tools, editors & vibes.</p>
+      <p>🛠 Creator of custom Editor • Owner of TEAM % SDF&gt;_</p>
+    </div>
+
+    <div class="links">
+      <a href="https://my.oninon.qzz.io" target="_blank"><i class="fa-solid fa-briefcase"></i> Portfolio</a>
+      <a href="https://www.youtube.com/@its_sadaf_officail" target="_blank"><i class="fa-brands fa-youtube"></i> YouTube</a>
+      <a href="https://discord.com/invite/KUy7QMVwWk" target="_blank"><i class="fa-brands fa-discord"></i> Discord</a>
+    </div>
+
+    <footer>
+      <div class="controls">
+        <button class="small-btn" id="muteBtn"><i class="fa-solid fa-volume-xmark"></i> Mute</button>
+      </div>
+      <div>© 2025 Sadaf • TEAM % SDF&gt;_</div>
+    </footer>
+  </div>
+
+  <script>
+    // Controls for mute/unmute YouTube iframe via postMessage API
+    const iframe = document.querySelector('iframe.video-bg');
+    const muteBtn = document.getElementById('muteBtn');
+
+    // Mute state
+    let isMuted = false;
+
+    function postMessageToPlayer(command) {
+      iframe.contentWindow.postMessage(JSON.stringify(command), '*');
+    }
+
+    // Mute/unmute toggle
+    muteBtn.addEventListener('click', () => {
+      if (isMuted) {
+        // unmute
+        postMessageToPlayer({ event: "command", func: "unMute" });
+        muteBtn.innerHTML = '<i class="fa-solid fa-volume-high"></i> Mute';
+      } else {
+        // mute
+        postMessageToPlayer({ event: "command", func: "mute" });
+        muteBtn.innerHTML = '<i class="fa-solid fa-volume-xmark"></i> Unmute';
+      }
+      isMuted = !isMuted;
+    });
+
+    // Copy Tag, Open Discord logic
+    document.addEventListener('DOMContentLoaded', () => {
+      const copyBtn = document.getElementById('copyTagBtn');
+      const openBtn = document.getElementById('openDiscordBtn');
+      const joinBtn = document.getElementById('joinServerBtn');
+      const username = document.getElementById('discordCard').dataset.username || 'root_sadaf';
+      const invite = document.getElementById('discordCard').dataset.invite || '#';
+
+      copyBtn.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText(username);
+          copyBtn.innerHTML = '<i class="fa-regular fa-check-circle"></i> Copied';
+          setTimeout(() => { copyBtn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy Tag'; }, 1400);
+        } catch(e) {
+          copyBtn.innerHTML = 'Failed';
+        }
+      });
+
+      openBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.location.href = 'discord://';
+        setTimeout(() => window.open(invite, '_blank'), 700);
+      });
+    });
+
+    // Enable YouTube player API
+    // Append enablejsapi=1 in the iframe src
+  </script>
+</body>
+</html>
